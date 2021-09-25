@@ -1,4 +1,3 @@
-
 var buttonColours=["red", "blue", "green", "yellow"];
 var gamePattern=[];
 var level=0;
@@ -37,7 +36,7 @@ function nextSequence()
 
 function checkAnswer(currentLevel)
 {
-    alert(currentLevel);
+    console.log(currentLevel);
 }
 
 function makeSound(randomChosenColor)
