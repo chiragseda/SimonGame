@@ -1,7 +1,9 @@
 var buttonColours=["red", "blue", "green", "yellow"];
-var gamePattern=[];
-var level=0;
+
 var userClickedPattern=[];
+var gamePattern=[];
+
+var level=0;
 var started = false;
 
 $(".btn").click(function(event) {
@@ -23,6 +25,7 @@ $(document).keydown(function(event)
 
 function nextSequence()
 {
+    userClickedPattern = [];
     level++;
     $("#level-title").text("Level " + level);
     $("h1").text("Level "+level);
@@ -36,7 +39,30 @@ function nextSequence()
 
 function checkAnswer(currentLevel)
 {
-    console.log(currentLevel);
+    if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) 
+    {
+        console.log("success");
+        if (userClickedPattern.length === gamePattern.length)
+        {
+           setTimeout(function(){nextSequence();},1000);
+        }
+    } 
+    else 
+    {
+        makeSound("wrong");
+        $('body').addClass("game-over");
+        setTimeout(function(){
+            $('body').removeClass("game-over");
+        },200);
+        $('h1').text("Game Over, Press Any Key to Restart");
+        startOver();
+    }
+}
+function startOver()
+{
+    level=0; 
+    gamePattern=[]; 
+    started=false;
 }
 
 function makeSound(randomChosenColor)
